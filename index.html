@@ -18,7 +18,13 @@
 <meta property="og:title" content="Gari Glacé">
 <meta property="og:description" content="Arte dulce en cada creación · Galletas decoradas, cupcakes y repostería en Monterrey, N.L.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍪</text></svg>">
+<meta property="og:url" content="https://gariglace.netlify.app/">
+<meta property="og:image" content="https://gariglace.netlify.app/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -137,45 +143,32 @@
     text-align: center;
   }
 
-  .avatar {
-    width: 104px;
-    height: 104px;
-    margin: 0 auto 16px;
-    border-radius: 50%;
-    padding: 4px;
-    background: linear-gradient(135deg, #f7b7c3, #fcd9b8, #e9c98f);
-    box-shadow: 0 6px 20px rgba(150,80,90,.18);
-  }
-  .avatar-inner {
+  .logo {
+    display: block;
     width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    overflow: hidden;
-    display: grid;
-    place-items: center;
-    background: #fff7f3;
-    font-family: "Fraunces", Georgia, serif;
-    font-size: 36px;
-    font-weight: 600;
-    color: #b45a6a;
-    letter-spacing: -1px;
+    max-width: 300px;
+    height: auto;
+    aspect-ratio: 800 / 393;
+    margin: 0 auto;
   }
-  .avatar-inner img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  h1 {
-    font-family: "Fraunces", Georgia, serif;
-    font-weight: 600;
-    font-size: 2.1rem;
-    line-height: 1.1;
-    letter-spacing: -.5px;
+  /* El nombre ya está en el logo; el h1 queda para Google y lectores de pantalla */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
   }
+
   .lema {
-    margin-top: 6px;
-    font-family: "Fraunces", Georgia, serif;
-    font-style: italic;
-    font-weight: 400;
-    font-size: 1.08rem;
-    color: #9a4e5c;
+    margin-top: 8px;
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #8a5a3c;           /* café del lema del logo */
   }
   .desc {
     margin: 12px auto 0;
@@ -375,7 +368,6 @@
   }
 
   @media (max-width: 360px) {
-    h1 { font-size: 1.85rem; }
     .btn.wa { font-size: 1rem; }
   }
 
@@ -401,6 +393,7 @@
       padding: 48px 32px;
     }
     .card { grid-column: 1; grid-row: 1; }
+    .logo { max-width: 340px; }
     .seccion {
       grid-column: 2;
       grid-row: 1;
@@ -429,14 +422,11 @@
 
   <main>
     <section class="card glass fade">
-      <div class="avatar">
-        <!-- Si subes un logo.jpg al repo, aparecerá aquí; si no, se muestran las iniciales -->
-        <div class="avatar-inner">
-          <img src="logo.jpg" alt="Logo de Gari Glacé" onerror="this.replaceWith('GG')">
-        </div>
-      </div>
-
-      <h1>Gari Glacé</h1>
+      <h1 class="sr-only">Gari Glacé</h1>
+      <picture>
+        <source srcset="logo.webp" type="image/webp">
+        <img class="logo" src="logo.png" alt="Gari Glacé" width="800" height="393">
+      </picture>
       <p class="lema">Arte dulce en cada creación</p>
       <p class="desc">Creaciones de galletas decoradas, cupcakes, repostería y más, hechas a mano con cariño.</p>
       <p class="ubicacion">
