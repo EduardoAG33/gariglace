@@ -8,15 +8,32 @@
   const ESTADO_AGENDA  = "Agenda cerrada, solo pedidos de temporada";
   const AGENDA_ABIERTA = false;  // true = punto verde · false = punto ámbar
   const FONDO_FOTO     = false;  // true = usa fondo.jpg desenfocado en vez de los blobs
+
+  const WHATSAPP = "5218123260898";
+  // Mensaje que aparece escrito al tocar WhatsApp (cada línea es un renglón)
+  const MENSAJE_WHATSAPP = [
+    "Hola Gari Glacé, quiero cotizar un pedido 🍪",
+    "",
+    "• Producto:",
+    "• Fecha y hora:",
+    "• Cantidad (piezas o personas):",
+    "• Temática y colores:",
+    "• Nombre, edad o texto:",
+    "• Sabor de pan y relleno:",
+    "• Empaque especial:",
+    "• ¿Recojo en domicilio o punto medio?:",
+    "",
+    "Si tengo imagen de referencia, la envío aquí 👇"
+  ].join("\n");
   /* ============================================================ */
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Gari Glacé · Arte dulce en cada creación</title>
-<meta name="description" content="Gari Glacé — galletas decoradas, cupcakes y repostería artesanal en Monterrey, N.L. Cotiza tu pedido por WhatsApp.">
+<meta name="description" content="Gari Glacé — galletas decoradas con royal icing, cupcakes personalizados, pasteles de cupcakes y repostería de temporada, hechos a mano en Juárez, N.L. (zona Monterrey). Cotiza por WhatsApp.">
 <meta name="theme-color" content="#f9dfe0">
 <meta property="og:title" content="Gari Glacé">
-<meta property="og:description" content="Arte dulce en cada creación · Galletas decoradas, cupcakes y repostería en Monterrey, N.L.">
+<meta property="og:description" content="Arte dulce en cada creación · Galletas decoradas, cupcakes y repostería hecha a mano en Juárez, N.L.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://gariglace.netlify.app/">
 <meta property="og:image" content="https://gariglace.netlify.app/og.jpg">
@@ -34,6 +51,7 @@
     --pink: #f9d6da;
     --text: #4a2a20;          /* café oscuro */
     --text-soft: #6e4536;
+    --rose: #8e3b50;          /* títulos, tono del rosa del logo pero más oscuro */
     --glass-bg: rgba(255,255,255,0.25);
     --glass-border: rgba(255,255,255,0.45);
     --glass-shadow: 0 8px 32px rgba(150,80,90,0.15);
@@ -172,7 +190,7 @@
   }
   .desc {
     margin: 12px auto 0;
-    max-width: 30ch;
+    max-width: 32ch;
     font-size: .95rem;
     line-height: 1.5;
     color: var(--text-soft);
@@ -237,7 +255,7 @@
   }
   .btn:hover { background-color: rgba(255,255,255,.38); transform: translateY(-2px); }
   .btn:active { transform: scale(.98); }
-  .btn:focus-visible { outline: 3px solid #b45a6a; outline-offset: 3px; }
+  .btn:focus-visible, summary:focus-visible { outline: 3px solid #b45a6a; outline-offset: 3px; }
 
   .btn .ico {
     flex: none;
@@ -284,18 +302,46 @@
   .ig .ico { color: #c13584; }
   .fb .ico { color: #1877f2; }
 
-  /* ---------- Lo que hacemos ---------- */
+  /* ---------- Secciones ---------- */
   .seccion {
     margin-top: 20px;
-    padding: 22px 16px 18px;
+    padding: 24px 16px 20px;
   }
   .seccion h2 {
     font-family: "Fraunces", Georgia, serif;
     font-weight: 500;
-    font-size: 1.35rem;
+    font-size: 1.4rem;
+    color: var(--rose);
     text-align: center;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
   }
+  /* Adorno bajo cada título */
+  .seccion h2::after {
+    content: "";
+    display: block;
+    width: 64px;
+    height: 2px;
+    margin: 8px auto 0;
+    border-radius: 2px;
+    background: linear-gradient(90deg, transparent, #e59aab, #e2b77e, transparent);
+  }
+  .seccion h3 {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--rose);
+    text-align: center;
+    margin: 22px 0 10px;
+  }
+  .nota {
+    margin-top: 10px;
+    font-size: .82rem;
+    line-height: 1.45;
+    text-align: center;
+    color: var(--text-soft);
+  }
+
+  /* Lo que hacemos */
   .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -326,20 +372,141 @@
     display: grid;
     place-items: center;
     font-size: 2.6rem;
-    padding-bottom: 22px;
+    padding-bottom: 30px;
   }
   .item figcaption {
     position: absolute;
     left: 6px;
     right: 6px;
     bottom: 6px;
-    padding: 5px 8px;
+    padding: 5px 6px;
     border-radius: 10px;
-    font-size: .8rem;
+    font-size: .78rem;
     font-weight: 700;
+    line-height: 1.25;
     text-align: center;
-    background: rgba(255,255,255,.78);
+    background: rgba(255,255,255,.8);
   }
+  .item figcaption small {
+    display: block;
+    font-size: .72rem;
+    font-weight: 600;
+    color: var(--rose);
+  }
+
+  /* Conoce a Irma */
+  .sobre { text-align: center; }
+  .sobre-foto {
+    width: 92px;
+    height: 92px;
+    margin: 0 auto 14px;
+    padding: 3px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f2a7b6, #f6cfa8, #e2b77e);
+    box-shadow: 0 6px 18px rgba(150,80,90,.18);
+  }
+  .sobre-foto img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #fde8e4;
+  }
+  .sobre p {
+    font-size: .95rem;
+    line-height: 1.6;
+    color: var(--text-soft);
+  }
+  .sobre p + p { margin-top: 10px; }
+  .sobre .cita {
+    font-family: "Fraunces", Georgia, serif;
+    font-style: italic;
+    font-size: 1.02rem;
+    color: var(--text);
+  }
+
+  /* Cómo hacer tu pedido */
+  .datos {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .datos li {
+    padding: 10px 6px;
+    border-radius: 14px;
+    text-align: center;
+    font-size: .76rem;
+    line-height: 1.3;
+    color: var(--text-soft);
+    background: rgba(255,255,255,.45);
+    border: 1px solid rgba(255,255,255,.6);
+  }
+  .datos li span { display: block; font-size: 1.35rem; margin-bottom: 4px; }
+  .datos li b { display: block; font-size: .88rem; color: var(--text); }
+
+  .faq { display: flex; flex-direction: column; gap: 8px; }
+  .faq details {
+    border-radius: 14px;
+    background: rgba(255,255,255,.42);
+    border: 1px solid rgba(255,255,255,.6);
+  }
+  .faq summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 13px 14px;
+    font-weight: 700;
+    font-size: .93rem;
+    cursor: pointer;
+    list-style: none;
+    border-radius: 14px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: "";
+    flex: none;
+    width: 8px;
+    height: 8px;
+    margin-right: 4px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg) translateY(-2px);
+    opacity: .55;
+    transition: transform .2s ease;
+  }
+  .faq details[open] summary::after { transform: rotate(-135deg) translateY(-2px); }
+  .faq .resp {
+    padding: 0 14px 14px;
+    font-size: .9rem;
+    line-height: 1.55;
+    color: var(--text-soft);
+  }
+  .faq .resp p + p, .faq .resp ul + p { margin-top: 8px; }
+  .faq .resp ul { padding-left: 18px; }
+  .faq .resp li + li { margin-top: 2px; }
+
+  .chips {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+  }
+  .chips li {
+    padding: 5px 11px;
+    border-radius: 999px;
+    font-size: .8rem;
+    font-weight: 600;
+    background: rgba(255,255,255,.5);
+    border: 1px solid rgba(255,255,255,.7);
+  }
+
+  .seccion .btn.wa { margin-top: 18px; min-height: 64px; }
 
   footer {
     margin-top: 22px;
@@ -369,44 +536,50 @@
 
   @media (max-width: 360px) {
     .btn.wa { font-size: 1rem; }
+    .datos li { font-size: .72rem; }
   }
 
   /* ---------- Tablet ---------- */
   @media (min-width: 600px) {
     main { max-width: 500px; padding-top: 48px; padding-bottom: 48px; }
     .card { padding: 36px 28px 28px; }
-    .seccion { padding: 24px 22px 22px; }
+    .seccion { padding: 26px 22px 22px; }
+    .datos li { font-size: .8rem; }
   }
 
   /* ---------- PC: dos columnas ----------
-     Izquierda: perfil + enlaces · Derecha: "Lo que hacemos" (misma altura) */
+     Izquierda: perfil + enlaces (se queda fija) · Derecha: secciones */
   @media (min-width: 900px) {
     main {
       max-width: 1080px;
-      min-height: 100vh;
-      min-height: 100dvh;
       display: grid;
       grid-template-columns: minmax(380px, 440px) 1fr;
-      align-content: center;
-      align-items: stretch;
+      align-items: start;
       column-gap: 32px;
-      padding: 48px 32px;
+      padding: 40px 32px;
     }
-    .card { grid-column: 1; grid-row: 1; }
+    .card { grid-column: 1; grid-row: 1; position: sticky; top: 32px; }
     .logo { max-width: 340px; }
-    .seccion {
-      grid-column: 2;
-      grid-row: 1;
-      margin-top: 0;
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-    }
-    .seccion h2 { font-size: 1.6rem; text-align: left; margin-bottom: 18px; }
-    .grid { flex: 1; gap: 16px; grid-auto-rows: 1fr; }
-    .item { aspect-ratio: auto; min-height: 200px; border-radius: 18px; }
+    .col-der { grid-column: 2; grid-row: 1; }
+    .col-der .seccion:first-child { margin-top: 0; }
+    .seccion { padding: 28px; }
+    .seccion h2 { font-size: 1.6rem; }
+    .grid { gap: 16px; }
+    .item { aspect-ratio: 4 / 5; border-radius: 18px; }
     .item .ph { font-size: 3.6rem; }
     .item figcaption { left: 10px; right: 10px; bottom: 10px; font-size: .9rem; padding: 7px 10px; }
+    .item figcaption small { font-size: .8rem; }
+    .sobre {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      column-gap: 24px;
+      align-items: center;
+      text-align: left;
+    }
+    .sobre-foto { grid-row: 1 / 4; width: 120px; height: 120px; margin: 0; }
+    .sobre h2 { text-align: left; }
+    .sobre h2::after { margin-left: 0; }
+    .datos li { font-size: .85rem; padding: 12px 8px; }
     footer { grid-column: 1 / -1; margin-top: 28px; }
   }
 </style>
@@ -428,17 +601,17 @@
         <img class="logo" src="logo.png" alt="Gari Glacé" width="800" height="393">
       </picture>
       <p class="lema">Arte dulce en cada creación</p>
-      <p class="desc">Creaciones de galletas decoradas, cupcakes, repostería y más, hechas a mano con cariño.</p>
+      <p class="desc">Galletas decoradas, cupcakes y repostería hechos a mano y personalizados para cada ocasión.</p>
       <p class="ubicacion">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
-        Monterrey, N.L.
+        Juárez, Nuevo León
       </p>
       <div>
         <p class="agenda" id="agenda" role="status"><span class="dot"></span><span id="agenda-texto"></span></p>
       </div>
 
       <nav class="links" aria-label="Enlaces">
-        <a class="btn glass wa fade" id="wa" href="https://wa.me/5218123260898?text=Hola%20Gari%20Glac%C3%A9%2C%20quiero%20cotizar%20un%20pedido" target="_blank" rel="noopener">
+        <a class="btn glass wa fade js-wa" href="https://wa.me/5218123260898?text=Hola%20Gari%20Glac%C3%A9%2C%20quiero%20cotizar%20un%20pedido" target="_blank" rel="noopener">
           <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg></span>
           <span class="label">Pedidos por WhatsApp<small>Cotiza tu pedido aquí</small></span>
           <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
@@ -464,34 +637,131 @@
       </nav>
     </section>
 
-    <section class="seccion glass fade" aria-labelledby="hacemos">
-      <h2 id="hacemos">Lo que hacemos</h2>
-      <!-- Sube foto1.jpg … foto4.jpg al repo y aparecerán solas en lugar de los íconos -->
-      <div class="grid">
-        <figure class="item">
-          <span class="ph" aria-hidden="true">🍪</span>
-          <img src="foto1.jpg" alt="Galletas decoradas" loading="lazy" onerror="this.remove()">
-          <figcaption>Galletas decoradas</figcaption>
-        </figure>
-        <figure class="item">
-          <span class="ph" aria-hidden="true">🧁</span>
-          <img src="foto2.jpg" alt="Cupcakes" loading="lazy" onerror="this.remove()">
-          <figcaption>Cupcakes</figcaption>
-        </figure>
-        <figure class="item">
-          <span class="ph" aria-hidden="true">🥐</span>
-          <img src="foto3.jpg" alt="Pan de temporada" loading="lazy" onerror="this.remove()">
-          <figcaption>Pan de temporada</figcaption>
-        </figure>
-        <figure class="item">
-          <span class="ph" aria-hidden="true">🎂</span>
-          <img src="foto4.jpg" alt="Pasteles" loading="lazy" onerror="this.remove()">
-          <figcaption>Pasteles</figcaption>
-        </figure>
-      </div>
-    </section>
+    <div class="col-der">
+      <section class="seccion glass fade" aria-labelledby="hacemos">
+        <h2 id="hacemos">Lo que hacemos</h2>
+        <!-- Sube foto1.jpg … foto4.jpg al repo y aparecerán solas en lugar de los íconos -->
+        <div class="grid">
+          <figure class="item">
+            <span class="ph" aria-hidden="true">🍪</span>
+            <img src="foto1.jpg" alt="Galletas de mantequilla decoradas con royal icing" loading="lazy" onerror="this.remove()">
+            <figcaption>Galletas decoradas<small>Desde $50 c/u</small></figcaption>
+          </figure>
+          <figure class="item">
+            <span class="ph" aria-hidden="true">🧁</span>
+            <img src="foto2.jpg" alt="Cupcakes personalizados" loading="lazy" onerror="this.remove()">
+            <figcaption>Cupcakes personalizados</figcaption>
+          </figure>
+          <figure class="item">
+            <span class="ph" aria-hidden="true">🎂</span>
+            <img src="foto3.jpg" alt="Pastel de cupcakes" loading="lazy" onerror="this.remove()">
+            <figcaption>Pasteles de cupcakes</figcaption>
+          </figure>
+          <figure class="item">
+            <span class="ph" aria-hidden="true">🎁</span>
+            <img src="foto4.jpg" alt="Repostería de temporada" loading="lazy" onerror="this.remove()">
+            <figcaption>Repostería de temporada</figcaption>
+          </figure>
+        </div>
+        <p class="nota">Galletas de mantequilla decoradas con royal icing. Cupcakes y pasteles se cotizan por WhatsApp.</p>
+      </section>
 
-    <footer>© <span id="anio"></span> Gari Glacé · Monterrey, N.L.</footer>
+      <section class="seccion glass fade sobre" aria-labelledby="irma">
+        <!-- Para poner su foto, sube irma.jpg al repo; mientras tanto se ve la galletita del logo -->
+        <div class="sobre-foto">
+          <img src="irma.jpg" alt="Irma, de Gari Glacé" loading="lazy" onerror="this.onerror=null;this.src='apple-touch-icon.png';this.alt=''">
+        </div>
+        <h2 id="irma">Hola, soy Irma</h2>
+        <p>Soy quien está detrás de Gari Glacé. Cada pedido lo preparo a mano y personalizado para tu ocasión, cuidando cada detalle.</p>
+        <p class="cita">“Gari Glacé nace del amor y la dedicación, para acompañar con un detalle dulce esos momentos que compartimos con quienes más amamos.”</p>
+      </section>
+
+      <section class="seccion glass fade" aria-labelledby="pedidos">
+        <h2 id="pedidos">Cómo hacer tu pedido</h2>
+
+        <ul class="datos">
+          <li><span aria-hidden="true">📅</span><b>3 semanas</b>de anticipación</li>
+          <li><span aria-hidden="true">🍪</span><b>Mín. 12</b>galletas por pedido</li>
+          <li><span aria-hidden="true">💗</span><b>50 %</b>de anticipo</li>
+        </ul>
+
+        <div class="faq">
+          <details>
+            <summary>Anticipación y agenda</summary>
+            <div class="resp">
+              <p>Trabajo sobre pedido con 3 semanas de anticipación, sujeto a disponibilidad de agenda. No manejo pedidos urgentes, pero puedes consultar disponibilidad para tu fecha.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Precios y pedido mínimo</summary>
+            <div class="resp">
+              <p>Galletas decoradas desde $50 por pieza, con pedido mínimo de 12. El precio final depende del diseño, los colores y los detalles.</p>
+              <p>Cupcakes y pasteles se cotizan por WhatsApp; la cantidad se confirma al cotizar.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Sabores y rellenos</summary>
+            <div class="resp">
+              <p>Pan de vainilla o chocolate, con relleno de cajeta, mermelada de fresa o Nutella (para cupcakes y pasteles).</p>
+            </div>
+          </details>
+          <details>
+            <summary>Entregas</summary>
+            <div class="resp">
+              <p>La entrega principal es en mi domicilio en Juárez, N.L.; comparto la dirección al coordinar la recolección.</p>
+              <p>También podemos acordar un punto medio con costo adicional, según la ubicación y mi disponibilidad.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Anticipo y políticas</summary>
+            <div class="resp">
+              <p>Se solicita el 50 % de anticipo para confirmar tu pedido. En pedidos menores de $500 se solicita el pago completo.</p>
+              <p>No hay cancelaciones ni devoluciones.</p>
+            </div>
+          </details>
+          <details>
+            <summary>¿Qué datos necesito para cotizar?</summary>
+            <div class="resp">
+              <ul>
+                <li>Producto que deseas</li>
+                <li>Fecha y hora en que lo necesitas</li>
+                <li>Cantidad de piezas o personas</li>
+                <li>Temática, colores e imagen de referencia, si tienes</li>
+                <li>Nombre, edad o texto que llevará</li>
+                <li>Sabor de pan y relleno, cuando corresponda</li>
+                <li>Tipo de empaque, si deseas uno especial</li>
+                <li>Si recoges en domicilio o prefieres acordar un punto medio</li>
+              </ul>
+              <p>Los diseños se revisan para confirmar disponibilidad y precio. Al tocar el botón de WhatsApp, esta lista ya aparece escrita para que solo la llenes.</p>
+            </div>
+          </details>
+        </div>
+
+        <h3>Temporadas</h3>
+        <ul class="chips">
+          <li>San Valentín</li>
+          <li>Primavera</li>
+          <li>Pascua</li>
+          <li>Día del Niño</li>
+          <li>Día de las Madres</li>
+          <li>Día del Maestro</li>
+          <li>Día del Padre</li>
+          <li>Día de los Abuelos</li>
+          <li>Fiestas Patrias</li>
+          <li>Halloween y Día de Muertos</li>
+          <li>Navidad y Año Nuevo</li>
+        </ul>
+        <p class="nota">En cada temporada confirmo qué productos ofreceré y el cupo disponible.</p>
+
+        <a class="btn glass wa js-wa" href="https://wa.me/5218123260898?text=Hola%20Gari%20Glac%C3%A9%2C%20quiero%20cotizar%20un%20pedido" target="_blank" rel="noopener">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg></span>
+          <span class="label">Cotizar por WhatsApp<small>Consulta disponibilidad para tu fecha</small></span>
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+      </section>
+    </div>
+
+    <footer>© <span id="anio"></span> Gari Glacé · Juárez, N.L.</footer>
   </main>
 
 <script>
@@ -501,6 +771,10 @@
 
   // Fondo con foto (opcional)
   if (FONDO_FOTO) document.body.classList.add("con-foto");
+
+  // WhatsApp con la lista de datos para cotizar
+  const urlWhatsApp = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(MENSAJE_WHATSAPP);
+  document.querySelectorAll(".js-wa").forEach(a => a.href = urlWhatsApp);
 
   document.getElementById("anio").textContent = new Date().getFullYear();
 </script>
