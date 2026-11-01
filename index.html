@@ -558,7 +558,9 @@
       column-gap: 32px;
       padding: 40px 32px;
     }
-    .card { grid-column: 1; grid-row: 1; position: sticky; top: 32px; }
+    /* El contenedor mide lo mismo que la columna derecha, así la tarjeta
+       fija se detiene ahí y no tapa el pie de página */
+    .col-izq { grid-column: 1; grid-row: 1; align-self: stretch; }
     .logo { max-width: 340px; }
     .col-der { grid-column: 2; grid-row: 1; }
     .col-der .seccion:first-child { margin-top: 0; }
@@ -582,6 +584,10 @@
     .datos li { font-size: .85rem; padding: 12px 8px; }
     footer { grid-column: 1 / -1; margin-top: 28px; }
   }
+  /* La tarjeta se queda fija solo si cabe completa en la pantalla */
+  @media (min-width: 900px) and (min-height: 820px) {
+    .card { position: sticky; top: 32px; }
+  }
 </style>
 </head>
 <body>
@@ -594,6 +600,7 @@
   </div>
 
   <main>
+    <div class="col-izq">
     <section class="card glass fade">
       <h1 class="sr-only">Gari Glacé</h1>
       <picture>
@@ -636,6 +643,7 @@
         </a>
       </nav>
     </section>
+    </div>
 
     <div class="col-der">
       <section class="seccion glass fade" aria-labelledby="hacemos">
