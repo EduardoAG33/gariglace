@@ -317,11 +317,15 @@
     border: 1px solid rgba(255,255,255,.6);
   }
   .item img {
+    transition: transform .4s ease;
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  @media (hover: hover) {
+    .item:hover img { transform: scale(1.04); }
   }
   .item .ph {
     position: absolute;
@@ -373,6 +377,44 @@
   @media (max-width: 360px) {
     h1 { font-size: 1.85rem; }
     .btn.wa { font-size: 1rem; }
+  }
+
+  /* ---------- Tablet ---------- */
+  @media (min-width: 600px) {
+    main { max-width: 500px; padding-top: 48px; padding-bottom: 48px; }
+    .card { padding: 36px 28px 28px; }
+    .seccion { padding: 24px 22px 22px; }
+  }
+
+  /* ---------- PC: dos columnas ----------
+     Izquierda: perfil + enlaces · Derecha: "Lo que hacemos" (misma altura) */
+  @media (min-width: 900px) {
+    main {
+      max-width: 1080px;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: grid;
+      grid-template-columns: minmax(380px, 440px) 1fr;
+      align-content: center;
+      align-items: stretch;
+      column-gap: 32px;
+      padding: 48px 32px;
+    }
+    .card { grid-column: 1; grid-row: 1; }
+    .seccion {
+      grid-column: 2;
+      grid-row: 1;
+      margin-top: 0;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+    }
+    .seccion h2 { font-size: 1.6rem; text-align: left; margin-bottom: 18px; }
+    .grid { flex: 1; gap: 16px; grid-auto-rows: 1fr; }
+    .item { aspect-ratio: auto; min-height: 200px; border-radius: 18px; }
+    .item .ph { font-size: 3.6rem; }
+    .item figcaption { left: 10px; right: 10px; bottom: 10px; font-size: .9rem; padding: 7px 10px; }
+    footer { grid-column: 1 / -1; margin-top: 28px; }
   }
 </style>
 </head>
